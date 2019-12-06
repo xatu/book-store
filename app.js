@@ -6,7 +6,8 @@ const { mongoConnect } = require('./util/database')
 const app = express()
 
 const adminRoutes = require('./routes/admin')
-// const shopRoutes = require('./routes/shop')
+const shopRoutes = require('./routes/shop')
+const User = require('./models/user')
 
 app.set('view engine', 'ejs')
 app.set('views', 'views')
@@ -22,11 +23,18 @@ app.use(express.static(
 ))
 
 app.use((req, res, next) => {
+  User.findById('5de9e32e1c9d4400002b8dda')
+    .then(user => {
+      req.user = user
+    })
+    .catch(err => {
+      console.log(err)
+    })
   next()
 })
 
 app.use('/admin', adminRoutes)
-// app.use(shopRoutes)
+app.use(shopRoutes)
 
 app.use(errorController.get404)
 
