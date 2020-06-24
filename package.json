@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-complete-guide",
+  "name": "book-store",
   "version": "1.0.0",
   "description": "Complete Node.js Guide",
   "main": "app.js",
@@ -8,7 +8,7 @@
     "start": "nodemon app.js",
     "start-server": "node app.js"
   },
-  "author": "Maximilian Schwarzmüller",
+  "author": "xatu",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.3",
@@ -26,5 +26,13 @@
       "node_modules/",
       "data/"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xatu/product-mongodb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xatu/product-mongodb/issues"
+  },
+  "homepage": "https://github.com/xatu/product-mongodb#readme"
 }
