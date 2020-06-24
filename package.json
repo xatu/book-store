@@ -26,13 +26,5 @@
       "node_modules/",
       "data/"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xatu/product-mongodb.git"
-  },
-  "bugs": {
-    "url": "https://github.com/xatu/product-mongodb/issues"
-  },
-  "homepage": "https://github.com/xatu/product-mongodb#readme"
+  }
 }

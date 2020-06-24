@@ -5,14 +5,13 @@
 ## Installation
 
 ```sh
-$ npm install --save book-store
+$ npm install
 ```
 
 ## Usage
 
-```js
-var bookStore = require('book-store');
-bookStore();
+```sh
+$ npm start
 ```
 
 ## License
