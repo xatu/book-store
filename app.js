@@ -12,25 +12,23 @@ const User = require('./models/user')
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
-app.use(bodyParser.urlencoded(
-  {
+app.use(
+  bodyParser.urlencoded({
     extended: false
-  }
-))
+  })
+)
 
-app.use(express.static(
-  path.join(__dirname, 'public')
-))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
   User.findById('5de9e32e1c9d4400002b8dda')
     .then(user => {
-      req.user = user
+      req.user = new User(user.name, user.email, user.cart, user._id)
+      next()
     })
     .catch(err => {
       console.log(err)
     })
-  next()
 })
 
 app.use('/admin', adminRoutes)
