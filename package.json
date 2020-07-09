@@ -31,8 +31,7 @@
   },
   "standard": {
     "ignore": [
-      "node_modules/",
-      "data/"
+      "node_modules/"
     ]
   }
 }
