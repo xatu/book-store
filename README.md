@@ -1,6 +1,6 @@
 # book-store
 
-Book store demo.
+Book store web app demo with CRUD operations of books and authentication.
 
 ## Installation
 
