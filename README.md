@@ -1,6 +1,6 @@
-# book-store [![NPM version](https://badge.fury.io/js/book-store.svg)](https://npmjs.org/package/book-store) [![Build Status](https://travis-ci.org/xatu/book-store.svg?branch=master)](https://travis-ci.org/xatu/book-store)
+# book-store
 
-> Complete Node.js Guide
+> Book store demo.
 
 ## Installation
 
@@ -14,6 +14,13 @@ $ npm install
 $ npm start
 ```
 
-## License
+## Setup
 
-ISC © [xatu]()
+Create .env with mongodb credentials
+
+```
+| Variable | Description | |
+|---|---|---|
+| `MONGODB_URI` | Uri of Mongodb Altas | **required** |
+| `PORT` | Por of the application | **required** |
+```

@@ -7,7 +7,8 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
-        path: '/products'
+        path: '/products',
+        isAuthenticated: req.isLoggedIn
       })
     })
     .catch(err => {
@@ -22,7 +23,8 @@ exports.getProduct = (req, res, next) => {
       res.render('shop/product-detail', {
         product: product,
         pageTitle: product.title,
-        path: '/products'
+        path: '/products',
+        isAuthenticated: req.isLoggedIn
       })
     })
     .catch(err => {
@@ -36,7 +38,8 @@ exports.getIndex = (req, res, next) => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/'
+        path: '/',
+        isAuthenticated: req.isLoggedIn
       })
     })
     .catch(err => {
@@ -64,20 +67,21 @@ exports.getCart = (req, res, next) => {
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
-        products: products
+        products: products,
+        isAuthenticated: req.isLoggedIn
       })
     })
     .catch(err => console.log(err))
 }
 
 exports.getOrders = (req, res, next) => {
-  req.user
-    .getOrders()
-    .then(order => {
+  Order.find({ 'user.userId': req.user._id })
+    .then(orders => {
       res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders',
-        order: order
+        orders: orders,
+        isAuthenticated: req.isLoggedIn
       })
     })
     .catch()
@@ -99,7 +103,7 @@ exports.postOrder = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items.map(i => {
-        return { quantity: i.quantity, product: i.productId }
+        return { quantity: i.quantity, product: { ...i.productId._doc } }
       })
       const order = new Order({
         user: {
@@ -111,6 +115,9 @@ exports.postOrder = (req, res, next) => {
       return order.save()
     })
     .then(result => {
+      req.user.clearCart()
+    })
+    .then(() => {
       res.redirect('/orders')
     })
     .catch(err => console.log(err))
