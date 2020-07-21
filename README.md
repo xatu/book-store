@@ -1,6 +1,6 @@
 # book-store
 
-> Book store demo.
+Book store demo.
 
 ## Installation
 
@@ -18,9 +18,8 @@ $ npm start
 
 Create .env with mongodb credentials
 
-```
 | Variable | Description | |
 |---|---|---|
-| `MONGODB_URI` | Uri of Mongodb Altas | **required** |
+| `MONGODB_URI` | URI of Mongodb cloud Altas | **required** |
 | `PORT` | Por of the application | **required** |
-```
+
