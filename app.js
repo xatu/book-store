@@ -30,25 +30,27 @@ app.use(
   })
 )
 
+app.use(express.static(path.join(__dirname, 'public')))
+
 app.use(
   session({
     secret: 'my long secret text',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store
   })
 )
 
-app.use(express.static(path.join(__dirname, 'public')))
-
 app.use((req, res, next) => {
-  User.findOne({ email: 'test@test.com' })
+  if (!req.session.user) {
+    return next()
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user
       next()
     })
-    .catch(err => {
-      console.log(err)
-    })
+    .catch(err => console.log(err))
 })
 
 app.use('/admin', adminRoutes)
@@ -58,10 +60,7 @@ app.use(authRoutes)
 app.use(errorController.get404)
 
 mongoose
-  .connect(
-    MONGODB_URI,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result => {
     User.findOne({ email: 'test@test.com' }).then(user => {
       if (!user) {
