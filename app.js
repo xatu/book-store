@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDbStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
+const flash = require('connect-flash')
 require('dotenv').config()
 
 const MONGODB_URI = process.env.MONGODB_URI
@@ -44,6 +45,7 @@ app.use(
   })
 )
 app.use(csrfProtection)
+app.use(flash())
 
 app.use((req, res, next) => {
   if (!req.session.user) {
